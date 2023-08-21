@@ -1,0 +1,137 @@
+body,html {
+    margin: 0;
+    padding: 0;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+
+.form-heading , .sim-heading{
+    margin-bottom: auto;
+    font-size: xx-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-self: center;
+}
+
+.form-main{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-submit{
+    width: fit-content;
+    align-self: center;
+}
+
+body{
+    min-height: 100%;
+}
+
+label{
+    width: fit-content;
+    align-self: center;
+}
+
+Input{
+    margin-left: 5px;
+}
+
+.sim-container{
+    font-family: Tahoma;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: auto;
+    background-color: aliceblue;
+    height: fit-content;
+    width: 60%;
+}
+
+.floor{
+    border-bottom: 2px solid black;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.up{
+    justify-self: center;
+    background-color: darkslateblue;
+    height: 20px;
+    width: fit-content;
+    min-width: 44px;
+    margin-bottom: 8px; 
+    border-radius: 5px;
+    padding: 2px;  
+    text-align: center;
+}
+.down{
+    background-color: crimson;
+    height: 20px;
+    width: fit-content;
+    min-width: 44px;
+    padding: 2px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.lift{
+    background-color: blue;
+    display: flex;
+    height: 8vh;
+    width: 6vh;
+    justify-self: center;
+    align-self: flex-end;
+    transition: transform 2s; /* Use transition with transform */
+}
+
+@keyframes liftMovement {
+    from {
+        bottom: 0;
+    }
+    to {
+        bottom: 100vh; /* Assuming each floor height is 10vh */
+    }
+}
+
+.lift.moving {
+    animation: liftMovement 2s linear;
+}
+
+.floorButtons{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.door{
+    background-color: grey;
+    height: 8vh;
+    width: 3vh;
+    border: solid 2px black;
+    border-bottom: 0px;   
+    transition: all 0.5s; 
+}
+
+.door.open {
+    left: 0;
+    right: 0;
+}
