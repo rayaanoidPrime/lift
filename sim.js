@@ -129,7 +129,7 @@ const moveLiftDown = (liftIndex , targetFloor) =>{
         openDoors(lift);
         setTimeout(()=>{
             closeDoors(lift);
-        },1000)
+        },2500)
         liftStates[liftIndex].moving = false;
         lift.classList.remove('moving');
     },timeReq*1000) 
