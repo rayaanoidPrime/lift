@@ -37,8 +37,8 @@ for(let i = 0 ; i<lifts ; i++){
     const doorL = document.createElement('div');
     const doorR = document.createElement('div');
 
-    doorR.classList.add('door');
-    doorL.classList.add('door');
+    doorR.classList.add('door','rdoor');
+    doorL.classList.add('door','ldoor');
 
     newlift.appendChild(doorL);
     newlift.appendChild(doorR);
@@ -61,7 +61,50 @@ function pixelsToVH(pixels) {
     return vh;
 }
 
+function openDoors(lift) {
+    const doors  = lift.querySelectorAll('.door')
+    const rdoor = doors[1]
+    const ldoor = doors[0]
+
+    rdoor.style.transform = 'translateX(50%) scaleX(1)';
+    ldoor.style.transform = 'translateX(-50%) scaleX(1)';
+}
+
+function closeDoors(lift) {
+    const doors  = lift.querySelectorAll('.door')
+    const rdoor = doors[1]
+    const ldoor = doors[0]
+    
+    rdoor.style.transform = 'translateX(0%) scaleX(1)';
+    ldoor.style.transform = 'translateX(0%) scaleX(1)';
+}
+
 const moveLiftUp = (liftIndex , targetFloor) =>{
+    console.log(liftIndex , targetFloor);
+    const lift = document.getElementsByClassName('lift')[liftIndex];
+    const liftState = liftStates[liftIndex];
+    const currFloor = document.getElementById(`floor-${liftState.position}`)
+    const floor = document.getElementById(`floor-${targetFloor}`)
+   
+
+    const currentFloor = liftState.position;
+    liftStates[liftIndex].moving = true;
+    lift.classList.add('moving');
+
+    const targetPixels = Math.abs(floors-1-targetFloor)*(-10) - pixelsToVH(2*(floors-1-targetFloor));
+    lift.style.transform = `translateY(${targetPixels}vh)`;
+    liftStates[liftIndex].position = targetFloor;
+    setTimeout(()=>{
+        openDoors(lift);
+        setTimeout(()=>{
+            closeDoors(lift);
+        },1000)
+        liftStates[liftIndex].moving = false;
+        lift.classList.remove('moving');
+    },2000) 
+}
+
+const moveLiftDown = (liftIndex , targetFloor) =>{
     console.log(liftIndex , targetFloor);
     const lift = document.getElementsByClassName('lift')[liftIndex];
     const liftState = liftStates[liftIndex];
@@ -78,20 +121,36 @@ const moveLiftUp = (liftIndex , targetFloor) =>{
     lift.style.transform = `translateY(${targetPixels}vh)`;
     liftStates[liftIndex].position = targetFloor;
     setTimeout(()=>{
+        openDoors(lift);
+        setTimeout(()=>{
+            closeDoors(lift);
+        },1000)
         liftStates[liftIndex].moving = false;
         lift.classList.remove('moving');
-    },2000)
+    },2000) 
     
 }
 
 const upButtons = document.querySelectorAll(".up");
 upButtons.forEach((button , floorIndex) => {
     button.addEventListener('click' , async()=>{
-        console.log(liftStates);
         let i = 0;
         for(; i <lifts ; i++){
             if(!liftStates[i].moving && liftStates[i].position > floorIndex){
                 moveLiftUp(i,floorIndex);
+                break;
+            }
+        }
+    })
+})
+
+const downButtons = document.querySelectorAll(".down");
+downButtons.forEach((button , floorIndex) => {
+    button.addEventListener('click' , async()=>{
+        let i = 0;
+        for(; i <lifts ; i++){
+            if(!liftStates[i].moving && liftStates[i].position < floorIndex){
+                moveLiftDown(i,floorIndex);
                 break;
             }
         }
