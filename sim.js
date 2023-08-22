@@ -94,23 +94,24 @@ const moveLiftUp = (liftIndex , targetFloor) =>{
     const targetPixels = Math.abs(floors-1-targetFloor)*(-10) - pixelsToVH(2*(floors-1-targetFloor));
     lift.style.transform = `translateY(${targetPixels}vh)`;
     liftStates[liftIndex].position = targetFloor;
+
+    const timeReq = Math.abs(currentFloor - targetFloor)*2
+    lift.style.transition = `transform ${timeReq}s`;
+    console.log(`${timeReq}s`)
     setTimeout(()=>{
         openDoors(lift);
         setTimeout(()=>{
             closeDoors(lift);
-        },1000)
+        },2500)
         liftStates[liftIndex].moving = false;
         lift.classList.remove('moving');
-    },2000) 
+    },timeReq*1000) 
 }
 
 const moveLiftDown = (liftIndex , targetFloor) =>{
     console.log(liftIndex , targetFloor);
     const lift = document.getElementsByClassName('lift')[liftIndex];
-    const liftState = liftStates[liftIndex];
-    const currFloor = document.getElementById(`floor-${liftState.position}`)
-    const floor = document.getElementById(`floor-${targetFloor}`)
-   
+    const liftState = liftStates[liftIndex];   
 
     const currentFloor = liftState.position;
     liftStates[liftIndex].moving = true;
@@ -120,6 +121,10 @@ const moveLiftDown = (liftIndex , targetFloor) =>{
     console.log( pixelsToVH(2*(floors-1-targetFloor)))
     lift.style.transform = `translateY(${targetPixels}vh)`;
     liftStates[liftIndex].position = targetFloor;
+
+    const timeReq = Math.abs(currentFloor - targetFloor)*2;
+    lift.style.transition = `transform ${timeReq}s `;
+    console.log(`${timeReq}s`)
     setTimeout(()=>{
         openDoors(lift);
         setTimeout(()=>{
@@ -127,7 +132,7 @@ const moveLiftDown = (liftIndex , targetFloor) =>{
         },1000)
         liftStates[liftIndex].moving = false;
         lift.classList.remove('moving');
-    },2000) 
+    },timeReq*1000) 
     
 }
 

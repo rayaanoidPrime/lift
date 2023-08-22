@@ -101,7 +101,7 @@ Input{
     width: 6vh;
     justify-self: center;
     align-self: flex-end;
-    transition: transform 2s; /* Use transition with transform */
+    /* transition: transform 2s; Use transition with transform */
 }
 
 @keyframes liftMovement {
@@ -129,6 +129,6 @@ Input{
     width: 3vh;
     border: solid 2px black;
     border-bottom: 0px;   
-    transition: all 1s; 
+    transition: all 2.5s; 
 }
 
