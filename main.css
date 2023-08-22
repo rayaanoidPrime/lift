@@ -7,9 +7,12 @@ body,html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
-    height: 100%;
-    overflow: auto;
+    align-items: center; /* Align horizontally in the center */
+    height: fit-content;
+    min-height: 100%;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form-container{
@@ -62,7 +65,9 @@ Input{
     margin-bottom: auto;
     background-color: aliceblue;
     height: fit-content;
-    width: 60%;
+    width: fit-content;
+    min-width: 60%;
+    overflow: auto;
 }
 
 .floor{
@@ -101,6 +106,8 @@ Input{
     width: 6vh;
     justify-self: center;
     align-self: flex-end;
+    margin-left: 2px;
+    margin-left: 2px;
     /* transition: transform 2s; Use transition with transform */
 }
 
